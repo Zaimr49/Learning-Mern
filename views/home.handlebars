@@ -1,0 +1,38 @@
+<h1>HANDLEBARS HOME PAGE</h1>
+<hr />
+<h4>
+  {{title1}}
+  <hr />
+  <b>Blog Title:</b>
+  {{{title2}}}
+  <br />
+  <b>Blog Author:</b>
+  {{{author}}}
+  <br />
+  <b>Publish Status:</b>
+  {{{publish}}}
+  <br />
+</h4>
+<hr />
+
+
+
+{{#if publish}}
+  <h3>Congratulations Blog has been published</h3>
+{{else}}
+  <h3>Blog has not been published</h3>
+{{/if}}
+
+{{!-- reverse of the above statement --}}
+{{#unless publish}}
+<h4>WHY NOT PUBLISHED</h4>
+{{else}}
+<h4>PUBLISHED!!!</h4>
+{{/unless}}
+
+<hr>
+
+{{!-- Array --}}
+{{#each blogs as |blgname blgindex|}}
+<h5>{{blgname}}-{{blgindex}}</h5>
+{{/each}}
