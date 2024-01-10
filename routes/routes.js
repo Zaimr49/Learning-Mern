@@ -12,7 +12,10 @@ var urlencodedParser = bodyParser.urlencoded({ extended: true });
 
 require(path.join(__dirname, "../database/dbconnect.js"));
 
-const blogmodel = require(path.join(__dirname, "../models/blogmodel"));
+// No use ab kyunke routes controller ko call karein gae instead of directly model ko, yeh ab sirf controllers mae call ho ga
+// const blogmodel = require(path.join(__dirname, "../models/blogmodel"));
+// uper wale ke jagah ab d
+const blogcontroller = require(path.join(__dirname, "../controllers/blogcontroller"));
 
 routes.get("/", (req, res) => {
   // res.send("Hello World!");
@@ -87,16 +90,33 @@ routes.get("/users", (req, res) => {
     });
 });
 
-routes.get("/blogs", (req, res) => {
-  blogmodel
-    .find({})
-    .then((blogs) => {
-      res.json(blogs);
-    })
-    .catch((err) => {
-      res.status(500).send(err);
-    });
-});
+
+// blogmodel --> ki wajah sae yeh nahi chaley ga
+// routes.get("/blogs", (req, res) => {
+//   blogmodel
+//     .find({})
+//     .then((data) => {
+//       // res.json(data);
+//       console.log(data);
+//       // Convert each document to a plain object
+//       //The issue you're experiencing with Handlebars, as indicated by the error message, arises from Handlebars' security model which restricts access to properties that are not own properties of the object. This often occurs when using Mongoose, as the objects returned from queries include methods and properties inherited from Mongoose's document prototype.
+//       const blogs = data.map(doc => doc.toObject());
+//       res.render("showblogs",{rowBlogs:blogs});
+//     })
+//     .catch((err) => {
+//       res.status(500).send(err);
+//     });
+// });
+
+//Uper wali ki jagah ham yeh karein gae:
+routes.get("/blogs",blogcontroller.showBlogs)
+
+
+
+
+
+
+
 
 const usermodel = mongoose.model("usermaster", {
   username: String,
@@ -132,28 +152,6 @@ routes.post("/saveuser", (req, res) => {
 // })
 
 //Agar post use karna hai toh middleware use karna hota hai
-routes.post("/saveblog", urlencodedParser, (req, res) => {
-  const newblog = blogmodel(req.body);
-  console.log(req.body);
-
-  // this can be used incase we don't have the same variable names in html and schema
-  // const newblog = blogmodel(
-  //   {blogname: req.body.txtblogname,
-  //   blogauthor: req.body.txtblogauthor,
-  //   blogcontent: req.body.txtblogcontent,
-  //   })
-
-  newblog
-    .save()
-    .then((data) => {
-      console.log(data);
-      console.log("New Blog Saved...");
-    })
-    .catch((error) => {
-      console.log("New Blog Saved Process Failed, Error:" + error);
-    });
-
-  res.send(req.body);
-});
+routes.post("/saveblog", urlencodedParser, blogcontroller.createBlog);
 
 module.exports = routes;
