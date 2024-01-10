@@ -28,6 +28,10 @@ const insecureHandlebars=allowInsecurePrototypeAccess(Handlebars);
 app.engine('handlebars',exphbs.engine({
   handlebars:allowInsecurePrototypeAccess(Handlebars)
 }))
+
+// This is to be used when we want static images then we make a public folder 
+app.use(express.static(path.join(__dirname,'/public')))
+
 app.set('view engine','handlebars');
 app.set('views','./views');
 

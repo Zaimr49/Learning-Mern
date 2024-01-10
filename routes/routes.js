@@ -15,7 +15,10 @@ require(path.join(__dirname, "../database/dbconnect.js"));
 // No use ab kyunke routes controller ko call karein gae instead of directly model ko, yeh ab sirf controllers mae call ho ga
 // const blogmodel = require(path.join(__dirname, "../models/blogmodel"));
 // uper wale ke jagah ab d
-const blogcontroller = require(path.join(__dirname, "../controllers/blogcontroller"));
+const blogcontroller = require(path.join(
+  __dirname,
+  "../controllers/blogcontroller"
+));
 
 routes.get("/", (req, res) => {
   // res.send("Hello World!");
@@ -29,13 +32,7 @@ routes.get("/", (req, res) => {
     title2: "<u>HOME PAGE TITLE</u>",
     author: "Blog Author",
     publish: true,
-    blogs:[
-      'Blog1',
-      'Blog2',
-      'Blog3',
-      'Blog4',
-      'Blog5',
-    ]
+    blogs: ["Blog1", "Blog2", "Blog3", "Blog4", "Blog5"],
   });
 });
 
@@ -65,12 +62,7 @@ routes.get("/find", (req, res) => {
   // res.sendFile(__dirname + "/view/" + "find.html");
   res.sendFile(path.join(__dirname, "..", "view", "find.html"));
 });
-routes.get("/saveblogpage", (req, res) => {
-  // res.sendFile(path.join(__dirname,'..','view','saveblog.html'));
 
-  //Now we are using handlebars
-  res.render("saveblog");
-});
 routes.get("/findnow", (req, res) => {
   res.send(req.query);
   // res.send(req.query.name) //Only to get the name
@@ -90,7 +82,6 @@ routes.get("/users", (req, res) => {
     });
 });
 
-
 // blogmodel --> ki wajah sae yeh nahi chaley ga
 // routes.get("/blogs", (req, res) => {
 //   blogmodel
@@ -109,15 +100,12 @@ routes.get("/users", (req, res) => {
 // });
 
 //Uper wali ki jagah ham yeh karein gae:
-routes.get("/blogs",blogcontroller.showBlogs)
+routes.get("/blogs", blogcontroller.showBlogs);
 
+routes.get("/showblogs", blogcontroller.showAllBlogs);
 
-routes.get("/showblogs",blogcontroller.showAllBlogs)
-
-
-
-
-
+// ab agar find ko call karna hai toh alag controller or route ki zarurat nahi hai
+routes.get("/showblogs/:p1", blogcontroller.showAllBlogs);
 
 const usermodel = mongoose.model("usermaster", {
   username: String,
@@ -138,6 +126,9 @@ routes.post("/saveuser", (req, res) => {
     });
   res.send(req.query);
 });
+
+routes.get("/saveblog", blogcontroller.addBlog);
+routes.get("/saveblog/:p1", blogcontroller.addBlog);
 
 // routes.get("/saveblog",(req,res)=>{
 //   const newblog=blogmodel(req.query);

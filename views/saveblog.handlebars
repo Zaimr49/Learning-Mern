@@ -1,21 +1,60 @@
-    <h1>Save Blog</h1>
-    <form action="/saveblog" method="post">
-        <div class="form-group">
-          <label for="exampleInputBlogName1">BLOG NAME</label>
-          <input type="text" class="form-control" id="exampleInputBlogName1" aria-describedby="emailHelp" placeholder="Enter Blog Name" name="blogname">
-        </div>
-        <div class="form-group">
-          <label for="exampleInputAuthorName1">BLOG AUTHOR </label>
-          <input type="text" class="form-control" id="exampleInputAuthorName1" aria-describedby="emailHelp" placeholder="Enter Blog Author" name="blogauthor">
-        </div>
-        <div class="form-group">
-          <label for="exampleInputBlogContent1">BLOG CONTENT </label>
-          <input type="text" class="form-control" id="exampleInputBlogContent1" aria-describedby="emailHelp" placeholder="Enter Blog Content" name="blogcontent">
-        </div>
-       
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-    <!-- <form action="/saveblog" method="get">
+{{#if data._id}}
+
+  <h1>EDIT Blog</h1>
+{{else}}
+  <h1>ADD NEW Blog</h1>
+{{/if}}
+
+<form action="/saveblog" method="post">
+  <div class="form-group">
+    <input
+      type="text"
+      class="form-control"
+      id="exampleInputBlogId"
+      name="id"
+      value="{{data._id}}"
+    />
+  </div>
+  <div class="form-group">
+    <label for="exampleInputBlogName1">BLOG NAME</label>
+    <input
+      type="text"
+      class="form-control"
+      id="exampleInputBlogName1"
+      aria-describedby="emailHelp"
+      placeholder="Enter Blog Name"
+      name="blogname"
+      value="{{data.blogname}}"
+    />
+  </div>
+  <div class="form-group">
+    <label for="exampleInputAuthorName1">BLOG AUTHOR </label>
+    <input
+      type="text"
+      class="form-control"
+      id="exampleInputAuthorName1"
+      aria-describedby="emailHelp"
+      placeholder="Enter Blog Author"
+      name="blogauthor"
+      value="{{data.blogauthor}}"
+    />
+  </div>
+  <div class="form-group">
+    <label for="exampleInputBlogContent1">BLOG CONTENT </label>
+    <input
+      type="text"
+      class="form-control"
+      id="exampleInputBlogContent1"
+      aria-describedby="emailHelp"
+      placeholder="Enter Blog Content"
+      name="blogcontent"
+      value="{{data.blogcontent}}"
+    />
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+<!-- <form action="/saveblog" method="get">
         <div class="form-group">
           <label for="exampleInputBlogName1">BLOG NAME</label>
           <input type="text" class="form-control" id="exampleInputBlogName1" aria-describedby="emailHelp" placeholder="Enter Blog Name" name="blogname">

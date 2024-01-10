@@ -1,10 +1,23 @@
-{{#each data}}
-  <h5>{{this}}</h5>
-  {{!-- 'this' keyword is neccessary --}}
-{{/each}}
+{{!-- {{#each data}}
+  <h5>{{this}}</h5> --}}
+{{! 'this' keyword is neccessary }}
+{{!-- {{/each}} --}}
 
-{{!-- agar this. kuch bhi use karna hai toh iske liye insecure off karna parta hai yah mapping of the data --}}
+{{! agar this. kuch bhi use karna hai toh iske liye insecure off karna parta hai yah mapping of the data }}
 
-{{#each data}}
+{{!-- {{#each data}}
   <h5>{{this.blogname}}</h5>
+{{/each}} --}}
+
+{{#each data as |rec id|}}
+  {{id}}
+  {{rec._id}}
+  <a href="/showblogs/{{rec._id}}">{{rec.blogname}}</a>
+  {{rec.blogauthor}}
+  <a href="/saveblog/{{rec._id}}">
+    <h5>Edit</h5>
+  </a>
+
+  <h5>Delete</h5>
+  <br />
 {{/each}}
