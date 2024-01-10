@@ -43,6 +43,12 @@ app.set('views','./views');
 app.use('/',require(path.join(__dirname,'/routes/routes.js')));
 app.use('/api/',require(path.join(__dirname,'/routes/api/routes.js')));
 
+
+app.use('/user/',require(path.join(__dirname,'/routes/userroutes.js')));
+app.use('/blog/',require(path.join(__dirname,'/routes/blogroutes.js')));
+
+
+
 const server=app.listen(port, () => {
   console.log(`Node Express Server Started, Example app listening on port ${port}`)
 
