@@ -36,3 +36,14 @@ exports.showBlogs = (req, res) => {
       res.status(500).send(err);
     });
 };
+
+exports.showAllBlogs=(req,res)=>{
+    blogmodel
+    .find({})
+    .then((dbRecords) => {
+      res.render("showallblogs", { data: dbRecords });
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    });
+}

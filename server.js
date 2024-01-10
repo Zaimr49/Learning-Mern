@@ -6,18 +6,30 @@ const path=require('path');
 const exphbs =require('express-handlebars');
 
 
-// changing the engine 
-app.engine('handlebars', exphbs.engine());
+// changing the engine //yeh neeche shift ho gaya hai
+// app.engine('handlebars', exphbs.engine());
 
 /* if we want to change the directory for the partials folder, to for example sections by default the name of the folder is partials*/
 // app.engine('handlebars',exphbs.engine({
 //   partialsDir:"./views/sections*"
 // }))
 
-app.set('view engine', 'handlebars');
-app.set('views', './views');
+
+// yeh neeche kar diya hai
+// app.set('view engine', 'handlebars');
+// app.set('views', './views');
 
 
+//Neeche wali sari cheezain karni parti hain so that you won't have to do the mapping jo ham pehle kar rahe thae while passing data to handlebars and using it their
+const Handlebars = require("handlebars");
+const {allowInsecurePrototypeAccess}=require('@handlebars/allow-prototype-access');
+const insecureHandlebars=allowInsecurePrototypeAccess(Handlebars);
+
+app.engine('handlebars',exphbs.engine({
+  handlebars:allowInsecurePrototypeAccess(Handlebars)
+}))
+app.set('view engine','handlebars');
+app.set('views','./views');
 
 
 

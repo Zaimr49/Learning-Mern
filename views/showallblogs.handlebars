@@ -1,0 +1,10 @@
+{{#each data}}
+  <h5>{{this}}</h5>
+  {{!-- 'this' keyword is neccessary --}}
+{{/each}}
+
+{{!-- agar this. kuch bhi use karna hai toh iske liye insecure off karna parta hai yah mapping of the data --}}
+
+{{#each data}}
+  <h5>{{this.blogname}}</h5>
+{{/each}}

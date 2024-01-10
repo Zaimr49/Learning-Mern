@@ -112,6 +112,7 @@ routes.get("/users", (req, res) => {
 routes.get("/blogs",blogcontroller.showBlogs)
 
 
+routes.get("/showblogs",blogcontroller.showAllBlogs)
 
 
 
