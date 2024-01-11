@@ -27,8 +27,8 @@ const usercontroller = require(path.join(
   //Save New User
   routes.post("/newusersave",urlencodedParser ,usercontroller.newusersaveFunc);
   
-  
-  
+  //Check User
+  routes.post("/checkuser",urlencodedParser,usercontroller.checkuser)
   
   
   
